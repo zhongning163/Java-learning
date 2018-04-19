@@ -8,8 +8,8 @@
 就可以将数据存在数组里，根据运算的结果作为角标直接去查数组中对应的元素即可
 
 这种方法叫做：查表法
-
 */
+
 class TableToHex
 {
 	public static void main(String[] args)
