@@ -1,0 +1,102 @@
+/**
+建立一个用来操作数组的工具类，其中包含常见的对数组操作的函数，如：最值，排序，查找等。
+@author 仲宁
+@version V1.0
+*/
+class ArrayTool
+{	
+	private ArrayTool(){}			//该类中的方法都是静态的，不需要创建对象，为保证不让其他程序创建该类对象，可以将构造函数私有化
+	
+	
+	/**
+	获取整型数组的最大值
+	@param arr 接收一个元素为int类型的数组
+	@return 该数组的最大元素值
+	
+	*/
+	public static int getMax(int[] arr)
+	{
+		int maxIndex=0;
+		for(int x=0;x<arr.length;x++)
+		{
+			if(arr[x]>arr[maxIndex]);
+			maxIndex=x;
+		}
+		return arr[maxIndex];
+	}
+	
+	/**
+	将数组中元素选择排序，并打印输出
+	@param arr 接收一个元素为int类型的数组
+	*/
+	public static void selectSort(int[] arr)
+	{
+		for(int x=0;x<arr.length-1;x++)
+		{
+			for(int y=x+1;y<arr.length;y++)
+			{
+				if(arr[x]>arr[y])
+					swap(arr,x,y);				//调用swap方法
+			}
+		}
+
+		System.out.print("[");
+		for(int x=0;x<arr.length;x++)
+		{
+			if(x!=arr.length-1)
+				System.out.print(arr[x]+",");
+			else
+				System.out.println(arr[x]+"]");
+		}
+	}
+
+	
+	/**
+	用于给数组中指定的两个元素进行位置置换
+	@param arr 接收一个元素为int类型的数组
+	@param x
+	@param y
+	*/
+	private static void swap(int[] arr,int x,int y)
+	{
+		int a=arr[x];
+		arr[x]=arr[y];
+		arr[y]=a;
+	}
+
+
+	/**
+	用来查找指定元素在数组中的角标
+	@param arr 接收一个元素为int类型的数组
+	@param key 要找的元素
+	@return 返回该元素第一次出现的位置
+	*/
+
+	public static int searchNum(int[] arr,int key)
+	{
+		for(int x=0;x<arr.length;x++)
+		{
+			if(arr[x]==key)
+				return x;
+		}
+		return -1;
+	}
+
+
+	/**
+	用于将数组转换成字符型表达方式，格式是[e1.e2.e3...]
+	@param arr 接收一个元素为int类型的数组
+	*/
+	public static void arrayToString(int[] arr)
+	{
+		String str="[";
+		for(int x=0;x<arr.length;x++)
+		{
+			if(x!=arr.length-1)
+				str=str+arr[x]+".";
+			else
+				str=str+arr[x]+"]";
+		}
+		System.out.println(str);
+	}
+}
