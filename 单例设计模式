@@ -16,3 +16,54 @@
 2：通过new在本类中创建一个本类对象
 3：创建一个公有方法，将创建的对象返回
 */
+class Single		
+{
+	private int num;
+	
+		//类一加载，对象就已经存在了（饿汉式）
+	private static Single s=new Single();		/*保证
+	private Single(){}							对象
+	public static Single getInstance()			的唯
+	{											一性
+		return s;								就加上这一段
+	}											*/			
+	
+
+
+	public void setNum(int num)
+	{
+		this.num=num;
+	}
+	public int getNum()
+	{
+		return num;
+	}
+	
+}
+
+class SingleDemo
+{
+	public static void main(String[] args)
+	{
+		Single s1=Single.getInstance();
+		Single s2=Single.getInstance();
+		s1.setNum(10);
+		s2.setNum(20);
+		System.out.println(s1.getNum()+"..."+s2.getNum());
+	}
+}
+
+
+class Single2				//类加载进来，没有对象，只有调用了getInstance（）方法时，才会创建对象
+							//单例设计模式的延迟加载形式	（懒汉式）
+{
+	private static Single2 s=null;
+	private Single2(){}
+
+	public static Single2 getInstance()
+	{
+		if(s==null)
+			s=new Single2();
+		return s;
+	}
+}
