@@ -90,3 +90,38 @@ class ExtendsDemo
 		w.work();
 	}
 }
+
+
+/*
+子父类中成员的特点：
+1.成员变量
+2.成员函数
+3.构造函数
+*/
+
+class Fu
+{
+	int num=5;
+}
+/*
+当本类的成员和局部变量同名用this区分
+当子父类中的成员变量同名用super区分
+*/
+class Zi extends Fu
+{
+	int num=9;
+	void show()
+	{
+		System.out.println(num+"...."+super.num);
+	}
+}
+
+class ExtendsDemo2
+{
+	public static void main(String[] args)
+	{
+			Zi c=new Zi();
+			c.show();
+	}
+
+}
