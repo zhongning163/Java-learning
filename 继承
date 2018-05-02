@@ -233,7 +233,7 @@ class Zi extends Fu
 {
 	Zi()				//这也是构造函数
 	{
-		//super();  this();   super()调用父类中的构造函数，this（）调用本类的构造函数
+		//super();  this();   super()调用父类中空参数的构造函数，this（）调用本类的构造函数
 		System.out.println("zi run");
 	}
 }
