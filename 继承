@@ -167,3 +167,47 @@ class ExtendsDemo3
 		z.show2();
 	}
 }
+
+
+/*******************************************************************************************/
+
+/*
+什么时候用覆盖操作？
+
+当对一个类进行子类的扩展时，子类需要保留父类的功能声明，但是要
+定义子类中该功能的特有内容时，就使用覆盖操作完成。
+*/
+
+class Phone
+{
+	void call()
+	{
+		System.out.println("calling");
+	}
+	void show()
+	{
+		System.out.println("number");
+	}
+}
+
+class NewPhone extends Phone
+{
+	void show()
+	{
+		System.out.println("name");
+		System.out.println("pic");
+		System.out.println("number");
+	}
+}
+
+class ExtendsDemo4
+{
+	public static void main(String[] args)
+	{
+		NewPhone p=new NewPhone();
+		p.call();
+		p.show();
+	}
+}
+
+
