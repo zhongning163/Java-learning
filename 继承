@@ -261,3 +261,14 @@ class ExtendsDemo5
 		new Zi();			//创建一个匿名对象，构造函数会随着对象的创建而调用一次
 	}
 }
+
+//Java中的所有类其实都是继承了Object类，Object类是所有类的父类
+比如
+class Demo  /*extends Object*/
+{
+	Demo()			//隐式构造函数
+	{
+		super();	//隐式super语句
+		return;		//隐式return语句
+	}
+}
