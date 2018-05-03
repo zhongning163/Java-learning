@@ -1,0 +1,44 @@
+/*
+final关键字：
+1.final可以修饰类，方法，变量
+2.final修饰的类不可以被继承
+3.final修饰的方法不可以被覆盖
+4.final修饰的变量是一个常量，只能被赋值一次
+5.内部类只能访问被final修饰的局部变量
+
+为什么要用final修饰变量：
+其实在程序如果一个数据是固定的
+那么直接使用这个数据就可以了，但是这样阅读性差，所以给该数据起个名称
+而且这个变量名称的值不能变化，所以加上final固定
+
+写法规范：常量所有字母都大写，多个单词中间用_连接
+
+继承的弊端：打破了封装性
+*/
+
+/*final */class Fu
+{
+	void method()
+	{
+		//调用了底层系统的资源。
+	}
+}
+
+class Zi extends Fu
+{
+	//final int z;	//final固定的是显示初始化的值，而不是默认初始化。不能写成final int x;
+	public static final double MY_PI=3.14	//全局变量
+	void method()
+	{
+		static final int x=9;		//一旦数据每个对象都一样（被各个对象共享），不需要改的话，就静态化，成员加上final后通常都会有静态static		
+		final int y;		//只写这个没错，但要是想打印y就会报错“未初始化变量y”
+		System.out.println("haha");
+	}
+}
+
+class Final
+{
+	public static void main(String[] args)
+	{
+	}
+}
