@@ -1,0 +1,31 @@
+常用Java类库包和它们的使用范围
+java.lang		提供利用Java进行程序设计的基础类，如Object和Class，数据类型，字符串，包装类，算术运算线程，错误和异常管理，以及系统操作管理（它提供一切Java程序的基础，这个库包被自动地包括在所编写的程序代码中，编程时不必再用import把它包括在程序的开头）
+
+java.text		提供处理文本、日期、数字和消息的类和格式化功能
+
+java.util 		提供各种资源利用的类，国际化以及集合类
+
+java.awt		提供用于创建用户界面和绘制图形图像，以及布局设计和管理的所有类。旧的GUI和图形图像库包
+
+java.awt.event		提供对各种事件处理的类和接口
+
+java.io	提供文件输入和输出类
+
+java.sql	提供各种数据库操作功能
+
+java.applet	提供创建applet所必需的类。旧applet库包，但许多功能还在使用
+
+javax.swing	提供全部由Java语言编写的各种创建GUI组件和applets的类
+
+使用“*”可以包括所指定库包中的所有类，但并不包括该库包的子库包。如：import java.awt.*包括了所有在java.awt库包中类，但并不包括java.awt的子库包event
+
+比较两个浮点变量的布尔关系时，考虑浮点数的超值：一般超2位以上，即单精度浮点数超过9位，双精度浮点数超过18位时会产生错误的比较结果。	Java编译器在编译超值的单精度浮点数的布尔关系时对其第9位“有效数”（小数点后的第6位）进行“3舍4入的操作”——123.45678f==123.456783，但123.45678f！=123.456784	处理双精度时，对滴18位“有效数”（小数点后的第15位）
+
+超值的浮点数编译时不会产生编译错误，但超值的其他基本型数据类型就会产生编译错误
+
+比较字符串是否相等的方法：euqals(String)和equalsIgnoreCase(String)前者区分大小写，后者忽略大小写，比较操作符==和！=比较的是地址是否相等，而这两个是在比较内容
+如：String str1=”My String”,str2=”My string”;
+System.out.println(str1.equals(str2)); 
+
+扫描输入--Scanner，它是由类库包java.util提供的。使用时应将它包括在程序的顶端，如：import java.util.Scanner;    由于Scanner所提供方法不是静态方法，必须先创建一个Scanner对象，然后才可调用它的方法
+如：Scanner input=new Scanner(System.in);
