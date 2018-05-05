@@ -206,3 +206,5 @@ class InterfaceDemo
 		System.out.println(Demo.NUM);
 	}
 }
+
+
