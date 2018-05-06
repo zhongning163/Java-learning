@@ -118,3 +118,95 @@ class InterfaceDemo
 5.类与接口之间是实现关系，而且类可以继承一个类的同时实现多个接口
 6.接口与接口之间可以有继承关系，而且可以多继承
 */
+
+/*************************************************************************************************/
+
+*
+接口与抽象类都是不断抽取出来的抽象的概念
+区别1：抽象类体现继承关系，一个类只能单继承
+接口体现实现关系，一个类可以多实现
+
+区别2：抽象类是继承，是“is a”关系，在定义该体系的基本内容
+接口是实现，是“like a”关系，在定义体系额外功能
+
+区别3：抽象类中可以定义非抽象方法，供子类直接使用
+接口的方法都是抽象，必须由子类去实现，接口中的成员都有固定修饰符
+*/
+
+abstract class 犬
+{
+	abstract void 吼叫();
+}
+
+interface 导盲
+{
+	abstract void 导盲();
+}
+
+class 导盲犬 extends 犬 implements导盲
+{
+	public void 吼叫()
+	{
+	}
+	public void 导盲()
+	{
+	}
+}
+
+/*******************************************************************************************************/
+
+/*
+笔记本电脑的使用
+为了扩展笔记本电脑的功能，但日后出现什么设备不知道
+
+定义一个规则，只要日后出现的设备都符合这个规则就可以了
+规则在Java中就是接口
+*/
+interface USB	//暴露的规则
+{
+	public void open();
+	public void close();
+}
+
+class BookPC
+{
+	public static void main(String[] args)
+	{
+		useUSB(/*原来是null*/new Upan());	//功能扩展
+		useUSB(new Mouse());
+	}
+	//使用规则
+	public static void useUSB(USB u)	//接口类型的引用，用于接收（指向）接口的子类对象
+	{
+		u.open();
+		u.close();
+	}
+}
+
+//一年后————————————————————————————————————————————————————————————————————
+//实现规则
+//这些设备和电脑的耦合性降低了
+class Upan implements USB
+{
+	public void open()
+	{
+		System.out.println("upan open");
+	}
+
+	public void close()
+	{
+		System.out.println("upan close");
+	}
+}
+
+class Mouse implements USB
+{
+	public void open()
+	{
+		System.out.println("Mouse open");
+	}
+	public void close()
+	{
+		System.out.println("Mouse close");
+	}
+}
