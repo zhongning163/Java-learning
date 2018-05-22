@@ -112,3 +112,110 @@ class ExceptionDemo
 		System.out.println("over");
 	}
 }
+
+/*********************************************************************************************/
+
+/*
+
+
+异常处理的原则：
+	1.函数内容如果抛出需要检测的异常，那么函数上必须要声明
+	否则必须在函数内用trycatch捕捉，否则编译失败
+
+	2.如果调用到了声明异常的函数，要么trycatch要么throws，否则编译失败
+
+	3.什么时候catch，什么时候throws呢？
+	功能内部能解决的问题就用trycatch，不能解决的就用throws告诉调用者，由调用者解决
+	
+	4.一个功能如果抛出了多个异常，那么调用时，必须对应多个catch进行针对性的处理
+	内部有几个需要检测的异常，就抛几个异常，抛出几个，就catch几个
+*/
+
+class FuShuIndexException extends Exception
+{
+	FuShuIndexException()
+	{}
+	FuShuIndexException(String message)
+	{
+		super(message);
+	}
+}
+
+class Demo 
+{
+public int method(int[] arr,int index)throws FuShuIndexException,NullPointerException//注意是在方法后抛出异常类，而不是在类名后
+	{
+		if(arr==null)
+			throw new NullPointerException("没有数组实体");
+		if(index<0)
+			throw new FuShuIndexException("角标变成了负数");
+		return arr[index];
+	}
+}
+
+class TryCatchDemo
+{
+	public static void main(String[] args)
+	{
+		int [] array=new int[]{2,3,2,44,3,53,5};
+		Demo d=new Demo();
+
+		try
+		{
+			int num=d.method(array,-3);
+			System.out.println("num="+num);
+		}
+
+		
+		catch(NullPointerException ojbk)
+		{
+			System.out.println(ojbk);
+		}
+		catch(FuShuIndexException ojbk)
+		{
+			System.out.println("别把角标设为负数！");
+			System.out.println("message:"+ojbk.getMessage());
+			System.out.println("string:"+ojbk/*.toString()*/);     //.toString()也可以省略
+		
+			ojbk.printStackTrace();   //JVM默认的异常处理机制就是调用的异常对象的这个方法
+			
+			System.exit(0);			//退出JVM（只有此时finally代码块才不会执行，其余时候都执行）
+		}
+		
+		catch(Exception ojbk)				//多catch父类的catch一定要放在最下面
+		{}
+		
+		finally				//通常用于关闭（释放）资源
+		{
+			System.out.println("over");
+		}
+
+
+	/*
+		比如：
+		连接数据库
+		查询
+		关闭连接
+		*/
+	}
+}
+
+try catch finally代码块组合特点
+1.
+try catch finally
+2.
+try catch（可多个） 当没有必要资源需要释放时，可以不用定义finally
+3.
+try finally  异常无法直接catch处理，但是资源需要关闭
+
+void show()throws Exception
+{
+	try
+	{
+		throw new Exception();
+	}
+
+	finally
+	{
+	}
+}
