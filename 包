@@ -12,11 +12,17 @@
 package mypack;		//用javac -d . PackageDemo.java编译之后，会在当前文件夹下生成“mypack”目录，并将该类存在这个目录下
 					//用java mypack.PackageDemo运行
 					//package mypack1.mypack2.mypack3.mypack4可以用来创建多级目录（包）
+import packa.Demo;
+import packa.*;	/*导入packa包中所有的类，但假如packa下还有子包packaaa，子包中有类文件DemoAbc.class，
+				程序中不能直接调用DemoAbc.class,因为import导入的是包中所有的类，而不是包中的子包*/
+import packa.packaaa.*;
+//导包的原则：用到哪个类，就导入哪个类
 class PackageDemo
 {
 	public static void main(String[] args) 
 	{
 		packa.Demo a=new packa.Demo();
+		Demo z=new Demo();
 		a.show();
 		//packb.DemoB b=new packb.DemoB();		//PackageDemo.java:22: 错误: method() 在 DemoB 中是 protected 访问控制
 		//b.method();							//protected修饰符用来给子类
@@ -35,3 +41,28 @@ class PackageDemo
 
 protected是给不同包中的子类使用的
 */
+
+/***************************************************************************************************/
+
+package packa;
+
+public class Demo extends packb.DemoB //一定不要忘了写packb.DemoB
+{
+	public void show()
+	{
+		method();
+		System.out.println("Hello zhongning");
+	}
+
+}
+
+/***************************************************************************************************/
+
+package packb;
+public class DemoB 
+{
+	protected void method()		//protected:只有继承了这个类的子类，才能使用这个方法，不能通过创建这个类的对象来调用这个方法
+	{
+		System.out.println("protected run");
+	}
+}
