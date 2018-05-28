@@ -1,0 +1,64 @@
+/*
+equals()方法比较的是对象的地址
+*/
+class Person extends Object
+{
+	private int age;
+	Person(int age)
+	{
+		this.age=age;
+	}
+	/*
+	一般都会覆盖equals方法，根据对象的特有内容，建立判断对象是否相同的依据（因为仅判断对象的地址是否相同没有意义）
+	当此方法被重写时，通常需要重写hashCode方法，以维护hashCode方法的常规协定，该协定声明相等对象必须具有相等的哈希码
+	*/
+	public boolean equals(Object obj) //Object obj=p2;   这是对equals方法的覆写（重写、覆盖），将equals的功能变成了判断年龄是否相等
+	{
+		if(!(obj instanceof Person))
+		{
+			throw new ClassCastException("类型错误");
+		}
+		Person p=(Person)obj;	//这样属于向下强制类型转换（Object比Person更抽象），需要进行健壮性判断
+		return this.age==p.age;
+	}
+
+	/*
+	public int hashCode()		//重写hashCode方法
+	{
+		return age;
+	}
+	*/
+	public String toString()	//重写toString方法
+	{
+		return "Person:"+age;
+	}
+}
+
+class Pig
+{
+}
+class EqualsDemo
+{
+	public static void main(String[] args)
+	{
+		Person p1=new Person(20);
+		Person p2=new Person(2);
+		Pig pig=new Pig();
+		//System.out.println(p1.equals(pig));
+		
+		Person p3=p1;
+		System.out.println(p1.equals(p3));
+		System.out.println(p1);		//打印出哈希码的十六进制形式
+		//hashCode方法可以获得对象的哈希码
+		System.out.println(Integer.toHexString(p1.hashCode()));		//Integer.toHexString()可以将字符串转为十六进制
+		
+		Class clazz1=p1.getClass();		//getClass方法用于返回此对象的运行时类
+		Class clazz2=p2.getClass();
+		System.out.println(clazz1==clazz2);	
+		System.out.println(clazz1.getName());	
+
+		//toString方法：返回该对象的字符串表示，结果应该是一个简明易懂的信息表达式，建议所有子类重写此方法
+		System.out.println(p1.toString());	//Object类的toString方法返回一个字符串，它的默认值是：getClass().getName+'@'+Integer.toHexString(hashCode());
+	}
+
+}
