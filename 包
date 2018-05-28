@@ -1,0 +1,37 @@
+/*
+包：
+对类文件进行分类管理
+给类提供多层命名空间
+写在程序文件的第一行
+类名的全称是包名.类名
+包也是一种封装形式
+
+包与包之间的类进行访问，被访问的包中的类必须是public的，被访问的包中的类的方法也必须是public的
+*/
+
+package mypack;		//用javac -d . PackageDemo.java编译之后，会在当前文件夹下生成“mypack”目录，并将该类存在这个目录下
+					//用java mypack.PackageDemo运行
+					//package mypack1.mypack2.mypack3.mypack4可以用来创建多级目录（包）
+class PackageDemo
+{
+	public static void main(String[] args) 
+	{
+		packa.Demo a=new packa.Demo();
+		a.show();
+		//packb.DemoB b=new packb.DemoB();		//PackageDemo.java:22: 错误: method() 在 DemoB 中是 protected 访问控制
+		//b.method();							//protected修饰符用来给子类
+		System.out.println("Hello Package");
+	}
+}
+
+/*
+总结：
+修饰符：
+			public			protected		default（什么都不写）		private
+同一类中	 ok					ok				ok							ok
+同一包中	 ok					ok				ok
+子类中		 ok					ok
+不同包中	 ok
+
+protected是给不同包中的子类使用的
+*/
