@@ -12,7 +12,7 @@
 package mypack;		//用javac -d . PackageDemo.java编译之后，会在当前文件夹下生成“mypack”目录，并将该类存在这个目录下
 					//用java mypack.PackageDemo运行
 					//package mypack1.mypack2.mypack3.mypack4可以用来创建多级目录（包）
-import packa.Demo;
+import packa.Demo;	//import的作用：为了简化类名的书写
 import packa.*;	/*导入packa包中所有的类，但假如packa下还有子包packaaa，子包中有类文件DemoAbc.class，
 				程序中不能直接调用DemoAbc.class,因为import导入的是包中所有的类，而不是包中的子包*/
 import packa.packaaa.*;
