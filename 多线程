@@ -1,0 +1,39 @@
+/*
+进程：正在进行中的程序
+
+线程：进程中一个负责程序执行的控制单元（执行路径）
+一个进程中可以多执行路径，称之为多线程
+
+一个进程中至少要有一个线程
+
+开启多个线程是为了同时运行多部分代码
+
+每一个线程都有自己运行的内容，这个内容可以成为线程要执行的任务
+
+多线程好处：解决了多部分同时运行的问题
+
+多线程弊端：线程太多导致效率降低
+
+JVM中执行main函数的线程与负责垃圾回收的线程就是多线程
+
+Object类中的finalize方法会在垃圾回收器运行时执行，System类中的gc方法会提醒垃圾回收器运行，但不确定什么时候运行
+*/
+class Demo extends Object
+{
+	public void finalize()
+	{
+		System.out.println("垃圾回收中");
+	}
+}
+
+class  ThreadDemo
+{
+	public static void main(String[] args) 
+	{
+		new Demo();
+		new Demo();
+		System.gc();
+		new Demo();
+		System.out.println("Hello World!");
+	}
+}
