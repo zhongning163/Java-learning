@@ -94,3 +94,192 @@ class ThreadDemo2
 		d2.start();
 	}
 }
+
+/*******************************************************************************************************************/
+
+/*
+创建线程的第一种方式：继承Thread类
+
+创建线程的第二种方式：实现Runnable接口
+
+步骤：
+1.定义类实现Runnable接口
+2.覆盖接口中的run方法，将线程的任务代码封装到run方法中
+3.通过Thread类创建线程对象，并将Runnable接口的子类对象作为Thread类的构造函数的参数进行传递
+	原因：因为线程的任务都封装在Runnable接口子类对象的run方法中，所以要在线程对象创建时就必须明确要运行的任务
+4.调用线程对象的start方法开启线程
+
+Runnable接口应该由那些打算通过某一线程执行其实例的类来实现。类必须定义一个称为run的无参数方法
+
+实现Runnable接口的好处：
+1.将线程的任务从线程的子类中分离出来，进行了单独的封装
+	按照面向对象的思想将任务封装成对象
+2.避免了java单继承的局限性
+
+因此，创建线程的第二种方式较为常用
+*/
+class Demo implements Runnable //extends Fu(Demo不能继承Thread)，用接口扩展Demo类的功能，让其中的内容可以作为线程的任务执行
+{
+	public void run()
+	{
+		show();
+	}
+	public void show()
+	{
+		for(int x=0;x<20;x++)
+		{
+			System.out.println(Thread.currentThread().getName()+"..."+x);
+		}
+	}
+}
+
+class ThreadDemo3
+{
+	public static void main(String[] args)
+	{
+		Demo d=new Demo();  //或者Runnable d=new Demo();
+		Thread t1=new Thread(d);
+		Thread t2=new Thread(d);
+		t1.start();
+		t2.start();
+	}
+}
+
+/*******************************************************************************************************************/
+
+/*
+需求：卖票
+*/
+/*
+线程安全问题产生的原因
+1.多个线程在操作共享的数据
+2.操作共享数据的线程代码有多条
+
+当一个线程在执行操作共享数据的多条代码过程中，其他线程参与了运算
+就会导致线程安全问题的产生
+
+解决思路：
+将多条操作共享数据的线程代码封装起来，当有线程在执行这些代码的时候，其他线程是不可以参与运算的
+必须要当前线程把这些代码都执行完毕后，其他线程才可以参与
+
+在java中，可以用同步代码块解决这个问题
+
+同步代码块的格式：
+synchronized(对象)
+{
+	需要被同步的代码;
+}
+
+同步的好处：
+解决了线程安全问题
+
+同步的弊端；相对降低了效率，因为同步外的线程都会判断同步锁
+
+同步的前提：同步中必须有多个线程并使用同一个锁
+
+
+*/
+class Ticket implements Runnable//extends Thread   //Runnable接口没有声明异常，因此run方法不能throws异常，需要用trycatch
+{
+	private int num=10000;
+	//Object obj=new Object();
+
+	public void run()
+	{
+		while (true)
+		{
+			synchronized(this) //或者synchronized(obj);
+			{		
+				if (num>0)
+				{
+					try
+					{
+						Thread.sleep(10);		//会出现错号票
+					}
+					catch (InterruptedException e)		
+					{
+
+					}
+					System.out.println(Thread.currentThread().getName()+"...卖票..."+num--);
+				}
+			}
+		}
+	}
+}
+class TicketDemo
+{
+	public static void main(String[] args) 
+	{
+		Ticket t=new Ticket();	//创建一个线程任务对象
+
+		Thread t1=new Thread(t);
+		Thread t2=new Thread(t);
+		Thread t3=new Thread(t);
+		Thread t4=new Thread(t);
+
+		t1.start();
+		t2.start();
+		t3.start();
+		t4.start();
+		
+		/*
+		Ticket t1=new Ticket();
+		Ticket t2=new Ticket();
+		Ticket t3=new Ticket();
+		Ticket t4=new Ticket();
+
+		t1.start();
+		t2.start();
+		t3.start();
+		t4.start();
+		*/
+	}
+}
+
+/***************************************************************************************************************/
+
+/*
+需求：两个储户，每个都到银行每次存钱100，每个人都存三次
+*/
+class Bank
+{
+	private int sum;
+	private Object obj=new Object();
+	public synchronized void add(int num)  //同步函数
+	{
+		//synchronized(obj)
+		//{
+			sum=sum+num;
+			try
+			{
+				Thread.sleep(10);
+			}
+			catch (InterruptedException e)
+			{
+			}
+			System.out.println("sum="+sum);
+		//}
+	}
+}
+class Cus implements Runnable
+{
+	private Bank b=new Bank();
+	public void run()
+	{
+		for(int x=0;x<3;x++)
+		{
+			b.add(100);
+		}
+	}
+}
+class BankDemo
+{
+	public static void main(String[] args) 
+	{
+		Cus a=new Cus();
+		Thread c1=new Thread(a);
+		Thread c2=new Thread(a);
+		c1.start();
+		c2.start();
+	}
+}
