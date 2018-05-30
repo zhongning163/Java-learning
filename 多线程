@@ -283,3 +283,74 @@ class BankDemo
 		c2.start();
 	}
 }
+
+/*************************************************************************************************************/
+
+
+/*
+同步函数使用的锁是this
+
+同步函数与同步代码块的区别：
+1.同步函数的锁是固定的this
+2,同步代码块的锁是任意的对象
+
+	建议使用同步代码块
+*/
+class Ticket implements Runnable
+{
+	private int num=400;
+	Object obj=new Object();
+	boolean flag=true;
+	public void run()
+	{
+		if(flag)
+		{
+			while (true)
+			{
+				synchronized(obj) //或者synchronized(this);
+				{		
+					if (num>0)
+					{
+						try
+						{
+							Thread.sleep(10);		//会出现错号票
+						}
+						catch (InterruptedException e)		
+						{}
+						System.out.println(Thread.currentThread().getName()+"...obj..."+num--);
+					}
+				}
+			}
+		}
+		
+	else
+		while(true)
+				show();
+	}	
+		public synchronized void show()		//同步函数的锁是this
+		{
+			if (num>0)
+					{
+						try
+						{
+							Thread.sleep(10);		//会出现错号票
+						}
+						catch (InterruptedException e)		
+						{}
+						System.out.println(Thread.currentThread().getName()+"...卖票..."+num--);
+					}
+		}
+	
+}
+class SynFunctionLockDemo 
+{
+	public static void main(String[] args) 
+	{
+		Ticket a=new Ticket();
+		Thread t1=new Thread(a);
+		Thread t2=new Thread(a);
+		t1.start();
+		a.flag=false;   
+		t2.start();
+	}
+}
