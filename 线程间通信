@@ -31,6 +31,7 @@ class Input implements Runnable
 		int x=0;
 		while (true)
 		{
+			//避免在执行Input线程时输入新的名字后还未输入新的性别时就一起输出了。从而出现mike。。女的情况
 			synchronized(r)
 			{
 				if(x==0)
