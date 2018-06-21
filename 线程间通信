@@ -1,0 +1,87 @@
+/*
+问题1：wait(),notify(),notifyAll(),用来操作线程为什么定义在了Object类中？
+1、这些方法存在于同步中
+2、使用这些方法必须要标识所属的同步的锁
+3、锁可以是任意对象，所以任意对象调用的方法一定定义Object类中
+
+问题2：wait（）和sleep（）的区别？
+1、wait（）释放CPU执行权，释放锁
+2、sleep（）释放CPU执行权，不释放锁
+
+线程间通信：
+多个线程在处理同一资源，但是任务却不同
+*/
+class Resource
+{
+	String name;
+	String sex;
+}
+
+//输入
+class Input implements Runnable
+{
+	//不能new对象，要保证输入与输出处理的是同一资源
+	Resource r;
+	Input(Resource r)
+	{
+		this.r=r;
+	}
+	public void run()
+	{
+		int x=0;
+		while (true)
+		{
+			synchronized(r)
+			{
+				if(x==0)
+				{
+					r.name="Mike";
+					r.sex="male";
+				}
+				else
+				{
+					r.name="小红";
+					r.sex="女女女女";
+				}
+			}
+			x=(x+1)%2;//这可以让x在while循环中不断的在0与1之间切换
+		}
+	}
+}
+
+//输出
+class Output implements Runnable
+{
+	Resource r;
+	Output(Resource r)
+	{
+		this.r=r;
+	}
+	public void run()
+	{
+		while(true)
+		{
+			synchronized(r)
+			{
+			System.out.println(r.name+"..."+r.sex);
+			}
+		}
+	}
+}
+class ResourceDemo
+{
+	public static void main(String[] args) 
+	{
+		//创建资源
+		Resource r=new Resource();
+		//创建任务
+		Input i=new Input(r);
+		Output o=new Output(r);
+		//创建线程，执行路径
+		Thread t1=new Thread(i);
+		Thread t2=new Thread(o);
+		//开启线程
+		t1.start();
+		t2.start();
+	}
+}
