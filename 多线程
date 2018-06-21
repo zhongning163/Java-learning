@@ -378,6 +378,8 @@ class Ticket implements Runnable
 		}
 	
 }
+
+
 class SynFunctionLockDemo 
 {
 	public static void main(String[] args) 
