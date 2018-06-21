@@ -66,7 +66,8 @@ class Demo extends Thread
 	private String name;
 	Demo(String name)
 	{
-		//super(name);		//将name作为线程的名称，因为Thread类中有Thread（String name）构造方法
+		//将name作为线程的名称，因为Thread类中有Thread（String name）构造方法
+		//super(name);		
 		this.name=name;
 	}
 	public void run()
@@ -78,8 +79,10 @@ class Demo extends Thread
 				for(int z=-999999;z<9999999;z++)
 				{}
 			}
-			System.out.println(name+"...x="+x+"..."+Thread.currentThread().getName());	//可以通过Thread的getName方法获取线程名称  Thread-编号（从0开始）
-													//Thread类中的currentThread方法可以返回当前正在运行的线程对象，这个方法是static的，可以通过类名直接调用
+			//可以通过Thread的getName方法获取线程名称  Thread-编号（从0开始）
+			//Thread类中的currentThread方法可以返回当前正在运行的线程对象，这个方法是static的，可以通过类名直接调用
+			System.out.println(name+"...x="+x+"..."+Thread.currentThread().getName());	
+													
 		}
 	}
 }
@@ -89,8 +92,10 @@ class ThreadDemo2
 	{
 		Demo d1=new Demo("旺财");
 		Demo d2=new Demo("xiaoqiang");
-		d1.start();		//如果直接写d1.run(),只是调用一个普通的run方法，并没有开启一个新的线程
-		System.out.println("Hello World!..."+Thread.currentThread().getName());			//这个程序有三个线程，主线程、以及创建的两个线程。主线程的名字就是main
+		//如果直接写d1.run(),只是调用一个普通的run方法，并没有开启一个新的线程
+		d1.start();		
+		//这个程序有三个线程，主线程、以及创建的两个线程。主线程的名字就是main
+		System.out.println("Hello World!..."+Thread.currentThread().getName());			
 		d2.start();
 	}
 }
@@ -118,7 +123,8 @@ Runnable接口应该由那些打算通过某一线程执行其实例的类来实
 
 因此，创建线程的第二种方式较为常用
 */
-class Demo implements Runnable //extends Fu(Demo不能继承Thread)，用接口扩展Demo类的功能，让其中的内容可以作为线程的任务执行
+//extends Fu(Demo不能继承Thread)，用接口扩展Demo类的功能，让其中的内容可以作为线程的任务执行
+class Demo implements Runnable 
 {
 	public void run()
 	{
