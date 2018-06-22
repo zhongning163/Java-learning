@@ -1,0 +1,36 @@
+/*
+创建线程的快速方式
+*/
+class ThreadTest
+{
+	public static void main(String[] args) 
+	{
+		new Thread()
+		{
+			public void run()
+			{
+				for(int x=0;x<50;x++)
+				{
+					System.out.println(Thread.currentThread().toString()+"....x=...."+x);
+				}
+			}
+		}.start();
+		
+		for(int x=0;x<50;x++)
+		{
+			System.out.println(Thread.currentThread().toString()+"y=...."+x);
+		}
+
+		Runnable r=new Runnable()
+		{
+			public void run()
+			{
+				for(int x=0;x<50;x++)
+				{
+					System.out.println(Thread.currentThread().toString()+"z=...."+x);
+				}
+			}
+		};
+		new Thread(r).start();
+	}
+}
