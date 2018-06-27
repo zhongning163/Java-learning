@@ -85,10 +85,54 @@ public class UDPSendDemo
 				//使用DatagramPacket将数据封装到该对象包中
 			byte[] buf=str.getBytes();
 
-			DatagramPacket dp=new DatagramPacket(buf,buf.length,InetAddress.getByName("192.168.1.100"),10000);
+			DatagramPacket dp=new DatagramPacket(buf,buf.length,InetAddress.getByName("192.168.199.206"),50000);
 			//3.通过udp的socket服务将数据包发送出去，使用send方法
 			ds.send(dp);
 			//4.关闭
 			ds.close();
 	}
+}
+
+/*********************************************************************************************************/
+
+package pk_ipdemo;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
+public class UDPReceDemo {
+	/*
+	 * 建立UDP接收端的思路：
+	 * 1、建立UDP Socket服务，因为要接收数据，必须明确一个端口号
+	 * 2、创建数据包，用于存储接收的数据，方便用数据包对象的方法解析这些数据
+	 * 3、使用Socket服务的receive方法将接收的数据存到数据包中
+	 * 4、通过数据包的方法解析数据包中的数据
+	 * 5、关闭资源
+	 * */
+
+	
+	public static void main(String[] args) throws IOException,SocketException,UnknownHostException
+	{
+		System.out.println("接收端启动：....");
+		//1、建立UDP Socket服务
+		DatagramSocket ds=new DatagramSocket(50000);
+		// 2、创建数据包
+		byte[] buf=new byte[1024];
+		
+		DatagramPacket dp=new DatagramPacket(buf,buf.length);
+		//3.使用Socket服务的receive方法将接收的数据存到数据包中
+		ds.receive(dp);
+		//4.通过数据包的方法解析数据包中的数据，比如地址，端口，数据内容
+		String ip=dp.getAddress().getHostAddress();
+		int port=dp.getPort();
+		String text=new String(dp.getData(),0,dp.getLength());
+		
+		System.out.println(ip+":"+port+""+text);
+		
+		ds.close();
+	}
+	
 }
