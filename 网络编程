@@ -33,6 +33,9 @@ DNS——域名解析服务器。在域名解析列表中，ip地址与域名一
 可通过域名获得ip地址
 本机的域名解析列表可在C：/Windows/System32/drivers/etc/hosts中改变
 
+Socket（套接字）是为网络服务提供的一种机制
+
+
 
 package pk_ipdemo;
 
