@@ -29,6 +29,8 @@ TCP：
 3、通过三次握手完成连接，是可靠协议（不会出现丢包的情况）
 4、必须建立连接，效率会降低
 
+DNS——域名解析服务器。在域名解析列表中，ip地址与域名一一对应
+
 package pk_ipdemo;
 
 import java.net.InetAddress;
