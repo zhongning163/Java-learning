@@ -35,7 +35,8 @@ DNS——域名解析服务器。在域名解析列表中，ip地址与域名一
 
 Socket（套接字）是为网络服务提供的一种机制
 通信的两端都有Socket
-
+网络通信其实就是Socket间通信
+数据在两个Socket间通过IO传输
 
 package pk_ipdemo;
 
