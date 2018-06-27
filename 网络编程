@@ -13,6 +13,9 @@ TCP/IP四层模型：
 网际层
 主机至网络层
 
+IP地址：网络中设备的标识
+端口号：用于标识进程的逻辑地址
+传输协议：通讯的规则（常见TCP、UDP）
 package pk_ipdemo;
 
 import java.net.InetAddress;
