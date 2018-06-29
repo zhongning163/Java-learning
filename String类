@@ -9,3 +9,90 @@ String str=new String(arr,1,3);//打印出来是apq
 
 将字符数组转换为字符串用构造函数，将字符串转为字符数组用toCharArray（）方法
 
+===========================================================================================================
+package pk_string;
+
+public class StringMethod {
+/*
+ * 按照面向对象的思想对字符串进行功能分类
+ * 1.获取
+ * 	1.1获取字符串中字符的个数（长度）
+ * 		int length()；
+ * 	1.2根据位置获取字符
+ * 		char charAt(int index);
+ * 	1.3根据字符获取在字符串中第一次出现的位置
+ * 	int indexOf(int ch)
+ * 	int indexOf(int ch,int from Index) 从指定位置进行ch的查找第一次出现的位置
+ * 	int indexOf(String str)
+ * 	int indexOf(String str，int fromIndex)
+ * 	根据字符获取在字符串中最后一次出现的位置
+ * 	int lastIndexOf(int ch)
+ * 	int lastIndexOf(int ch,int from Index) 从指定位置进行ch的查找第一次出现的位置
+ * 	int lastIndexOf(String str)
+ * 	int lastIndexOf(String str，int fromIndex)
+ * 
+ *	 1.4获取字符串中一部分字符串，也叫子串
+ * 	String subString(int beginIndex,int endIndex),包括起始索引，不包括结束索引
+ * 	String subString(int beginIndex)
+ * 
+ * 2.转换
+ *	 2.1将字符串变成字符串数组（切割）
+ *   String[] split(String regex)
+ *   
+ *   2.2将字符串变成字符数组
+ *   char[] toCharArray()
+ *   
+ *   2.3将字符串变成字节数组
+ *   byte[] getBytes()
+ *   
+ *   2.4将字符串中的字母转换大小写
+ *   String toUpperCase();
+ *   String toLowerCase();
+ *   
+ *   2.5将字符串中字符替换
+ *   String replace(char oldChar,char newChar)
+ *   
+ *   2.6将字符串两端的空白字符去掉
+ *   String trim（）  //用户输入用户名如果在最后多输入一个空格会把空格消掉
+ *   
+ *   2.7将字符串进行连接
+ *   String concat(String)
+ *   
+ * 3.判断
+ * 	3.1两个字符串是否相同
+ * 		boolean equals(Object obj)
+ * 		boolean equalsIgnoreCase(String str)//忽略大小写
+ *  3.2字符串是否包含指定字符串
+ *  	boolean contains（String str）
+ *  3.3判断字符串是否以指定字符串开头，是否以指定字符串结尾
+ *  	boolean startsWith(String str)
+ *  	boolean endWith(String str)
+ *  
+ * 4.比较
+ * 		int compareTo(String str)//返回为正整数，此字符串按字典顺序大于参数字符串，
+ *      						//返回0，两者按字典顺序相等，返回负整数，此字符串按字典顺序小于参数字符串，
+ * ***/
+	public static void main(String []args)
+	{
+		String s="张三,李四,王五";
+		String[] a=s.split(",");
+		for(int i=0;i<a.length;i++)
+		{
+			System.out.println(a[i]);
+		}
+		/*String s1="张三.吴四.王五";
+		String[] a1=s1.split("\\.");// 必须要加上两个\
+		for(int i=0;i<a1.length;i++)
+		{
+			System.out.println(a1[i]);
+		}
+		*/
+		String str="ab你";
+		byte[] arr=str.getBytes();
+		for(int i=0;i<arr.length;i++)
+		{
+			System.out.println(arr[i]);
+		}
+		System.out.println(4+1+"");
+	}
+}
