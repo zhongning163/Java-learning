@@ -132,4 +132,41 @@ public class StringTest_1 {
 		}
 	}
 }
+========================================================================================================================
+
+
+package pk_string;
+
+public class StringTest_2 {
+
+	/*
+	 * 2一个子字符串在整个字符串中出现的次数
+	 * "nbajjshnbajsjnbajdjcdnbaefnba"
+	 * 思路：
+	 * 1.要找的子串是否存在，如果存在获取其出现的位置，这个可以使用indexOf完成
+	 * 2.如果找到了，那么就记录出现的位置并在剩余的字符串中继续查找该子串，而剩余字符串
+	 * 的起始位是出现位置+子串的长度
+	 * 3.以此类推，通过循环完成查找，如果找不到就是-1，并对每次找到用计数器记录
+	 */
+	public static void main(String[] args)
+	{
+		String str="nbajjshnbajsjnbajdjcdnbaefnba";
+		String key="nba";
+		
+		int count=getKeyCount(str,key);
+		System.out.println(count);
+	}
+	
+	public static int getKeyCount(String str,String key)
+	{
+		int count=0;
+		while(str.indexOf(key)!=-1)
+		{
+			str=str.substring(str.indexOf(key)+key.length());
+			count++;
+		}
+		return count;
+		
+	}
+}
 
