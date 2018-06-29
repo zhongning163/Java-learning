@@ -98,4 +98,38 @@ public class StringMethod {
 }
 ====================================================================================================================
 
+package pk_string;
+
+public class StringTest_1 {
+	/*
+	 * 1.给定一个字符串数组，按照字典顺序进行从小到大的排序
+	 *  {"nba","abc","cba","zz","qq","haha"}
+	 * 
+	 * 思路： 1.对数组排序，可以用选择、冒泡都行
+	 *  2.for嵌套和比较以及换位
+	 ***/
+
+	public static void main(String[] args) {
+		String[] str = { "nba", "abc", "cba", "zz", "qq", "haha" };
+		for (int i = 0; i < str.length; i++) {
+			for (int j = i + 1; j < str.length; j++) {
+				if ((str[i].compareTo(str[j])) > 0) {
+					String temp = "";
+					temp = str[i];
+					str[i] = str[j];
+					str[j] = temp;
+				}
+			}
+		}
+
+		for (int i = 0; i < str.length; i++) {
+
+			if (i == str.length - 1) {
+				System.out.println(str[i]);
+				return;
+			}
+			System.out.print(str[i] + ",");
+		}
+	}
+}
 
